@@ -30,6 +30,12 @@ public class Program {
         List<Seller> sellers1 = sellerDao.findAll();
         for (Seller obj : sellers1)
             System.out.println("   " +obj);
+
+        System.out.println("=== TEST 4: seller insert ===");
+        Seller seller2 = new Seller(null, "Greg", "greg@gmail.com", LocalDate.of(2025, 01, 15), 9000.0, new Department(4, "Books"));
+        sellerDao.insert(seller2);
+        System.out.println("   " + seller2.getId());
+
     }
 
 
