@@ -40,7 +40,7 @@ public class SellerDaoJDBC implements SellerDao {
     public Seller findById(Integer id) {
         PreparedStatement st = null;
         ResultSet rs = null;
-        Seller seller = null;
+
         try {
             st = conn.prepareStatement(
                     """
@@ -56,9 +56,10 @@ public class SellerDaoJDBC implements SellerDao {
 
             if (rs.next()) {
                 Department department = instantiateDepartment(rs);
-                seller = instantieteSeller(rs, department);
+                Seller seller  = instantieteSeller(rs, department);
+                return seller;
             }
-            return seller;
+            return null;
 
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
