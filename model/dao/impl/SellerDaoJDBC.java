@@ -11,10 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class SellerDaoJDBC implements SellerDao {
@@ -99,6 +96,25 @@ public class SellerDaoJDBC implements SellerDao {
 
     @Override
     public void deleteById(Integer id) {
+        PreparedStatement st = null;
+
+        try{
+            st = conn.prepareStatement("""
+                    DELETE FROM seller WHERE Id = ?
+                    """);
+            st.setInt(1, id);
+
+            Seller seller = findById(id);
+            if (Objects.equals(seller.getId(), id)){
+                    st.executeUpdate();
+            }
+
+        } catch (SQLException | NullPointerException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+        }
+
 
     }
 

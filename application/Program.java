@@ -6,6 +6,7 @@ import model.entities.Department;
 import model.entities.Seller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Program {
@@ -42,7 +43,13 @@ public class Program {
         Seller seller3 = sellerDao.findById(1);
         seller3.setName("bebe Waine");
         sellerDao.update(seller3);
-        System.out.println("update complit");
+        System.out.println("update complited");
+
+        System.out.println();
+        System.out.println("=== TEST 6: seller delete ===");
+
+        sellerDao.deleteById(20);
+        System.out.println("delete complited");
 
 
     }
